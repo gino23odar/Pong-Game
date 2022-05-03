@@ -42,6 +42,33 @@ def run_game():
     ball1.penup()
     ball1.goto(0, 0)
 
+    def paddle_1_up():
+        y = paddle_1.ycor()
+        y += 20
+        paddle_1.sety(y)
+
+    def paddle_1_down():
+        y = paddle_1.ycor()
+        y -= 20
+        paddle_1.sety(y)
+
+    def paddle_2_up():
+        y = paddle_2.ycor()
+        y += 20
+        paddle_2.sety(y)
+
+    def paddle_2_down():
+        y = paddle_2.ycor()
+        y -= 20
+        paddle_2.sety(y)
+
+    # keyboard binding
+    win.listen()
+    win.onkeypress(paddle_1_up, 'w')
+    win.onkeypress(paddle_1_down, 's')
+    win.onkeypress(paddle_2_up, 'Up')
+    win.onkeypress(paddle_2_down, 'Down')
+
     # main loop
     while True:
         win.update()
