@@ -41,6 +41,9 @@ def run_game():
     ball1.shapesize(stretch_wid=2, stretch_len=2)
     ball1.penup()
     ball1.goto(0, 0)
+    # movement
+    ball1.dx = 0.2
+    ball1.dy = 0.2
 
     def paddle_1_up():
         y = paddle_1.ycor()
@@ -72,6 +75,28 @@ def run_game():
     # main loop
     while True:
         win.update()
+
+        # ball movement
+        ball1.setx(ball1.xcor() + ball1.dx)
+        ball1.sety(ball1.ycor() + ball1.dy)
+
+        # top/bottom - borders: 750/ 2 = 375 || ball1 = 40 ==> 375 - 20 = 355
+        if ball1.ycor() > 355:
+            ball1.sety(355)
+            ball1.dy *= -1
+
+        if ball1.ycor() < -355:
+            ball1.sety(-355)
+            ball1.dy *= -1
+
+        # left/right - borders: 1000/ 2 = 500 || ball1 = 40 ==> 500 - 20 = 480
+        if ball1.xcor() > 480:
+            ball1.goto(0, 0)
+            ball1.dx *= -1
+
+        if ball1.xcor() < -480:
+            ball1.goto(0, 0)
+            ball1.dx *= -1
 
 
 # Press the green button in the gutter to run the script.
