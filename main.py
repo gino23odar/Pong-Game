@@ -36,7 +36,7 @@ def run_game():
     # Ball
     ball1 = turtle.Turtle()
     ball1.speed(0)
-    ball1.shape('circle')
+    ball1.shape('square')
     ball1.color('black')
     ball1.shapesize(stretch_wid=2, stretch_len=2)
     ball1.penup()
@@ -96,6 +96,16 @@ def run_game():
 
         if ball1.xcor() < -480:
             ball1.goto(0, 0)
+            ball1.dx *= -1
+
+        # paddle reaction
+        if (440 < ball1.xcor() < 450) and (paddle_2.ycor() + 95 > ball1.ycor() > paddle_2.ycor() - 85):
+            ball1.setx(440)
+            ball1.dx *= -1
+
+        if (-450 < ball1.xcor() < -440) and (ball1.ycor() < paddle_1.ycor() + 95) \
+                and (ball1.ycor() > paddle_1.ycor() - 85):
+            ball1.setx(-440)
             ball1.dx *= -1
 
 
