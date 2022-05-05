@@ -11,6 +11,10 @@ def run_game():
     # stop the window from automatically updating
     win.tracer(0)
 
+    # Score
+    score_left = 0
+    score_right = 0
+
     # Paddle 1
     paddle_1 = turtle.Turtle()
     # set speed to the maximum possible
@@ -44,6 +48,15 @@ def run_game():
     # movement
     ball1.dx = 0.2
     ball1.dy = 0.2
+
+    # pen
+    pen = turtle.Turtle()
+    pen.speed(0)
+    pen.color('black')
+    pen.penup()
+    pen.hideturtle()
+    pen.goto(0, 330)
+    pen.write('0 : 0', align='center', font=('Courier', 26, 'bold'))
 
     def paddle_1_up():
         y = paddle_1.ycor()
@@ -93,10 +106,16 @@ def run_game():
         if ball1.xcor() > 480:
             ball1.goto(0, 0)
             ball1.dx *= -1
+            score_left += 1
+            pen.clear()
+            pen.write('{} : {}'.format(score_left, score_right), align='center', font=('Courier', 26, 'bold'))
 
         if ball1.xcor() < -480:
             ball1.goto(0, 0)
             ball1.dx *= -1
+            score_right += 1
+            pen.clear()
+            pen.write('{} : {}'.format(score_left, score_right), align='center', font=('Courier', 26, 'bold'))
 
         # paddle reaction
         if (440 < ball1.xcor() < 450) and (paddle_2.ycor() + 95 > ball1.ycor() > paddle_2.ycor() - 85):
