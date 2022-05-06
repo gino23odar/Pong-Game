@@ -1,6 +1,7 @@
 # Python game of pong
 
 import turtle
+import winsound
 
 
 def run_game():
@@ -97,10 +98,13 @@ def run_game():
         if ball1.ycor() > 355:
             ball1.sety(355)
             ball1.dy *= -1
+            # for some reason winsound.Playsound does not play my sound files so I'm using simple beeps
+            winsound.Beep(1000, 50)
 
         if ball1.ycor() < -355:
             ball1.sety(-355)
             ball1.dy *= -1
+            winsound.Beep(1000, 50)
 
         # left/right - borders: 1000/ 2 = 500 || ball1 = 40 ==> 500 - 20 = 480
         if ball1.xcor() > 480:
@@ -109,6 +113,7 @@ def run_game():
             score_left += 1
             pen.clear()
             pen.write('{} : {}'.format(score_left, score_right), align='center', font=('Courier', 26, 'bold'))
+            winsound.Beep(4000, 100)
 
         if ball1.xcor() < -480:
             ball1.goto(0, 0)
@@ -116,16 +121,19 @@ def run_game():
             score_right += 1
             pen.clear()
             pen.write('{} : {}'.format(score_left, score_right), align='center', font=('Courier', 26, 'bold'))
+            winsound.Beep(4000, 100)
 
         # paddle reaction
         if (440 < ball1.xcor() < 450) and (paddle_2.ycor() + 95 > ball1.ycor() > paddle_2.ycor() - 85):
             ball1.setx(440)
             ball1.dx *= -1
+            winsound.Beep(500, 50)
 
         if (-450 < ball1.xcor() < -440) and (ball1.ycor() < paddle_1.ycor() + 95) \
                 and (ball1.ycor() > paddle_1.ycor() - 85):
             ball1.setx(-440)
             ball1.dx *= -1
+            winsound.Beep(500, 50)
 
 
 # Press the green button in the gutter to run the script.
